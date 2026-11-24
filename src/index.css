@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Apple-Inspired Design System Tokens (DESIGN.md) */
+    --color-primary: #0071e3;
+    --color-primary-hover: #005bb5;
+    --color-background: #f5f5f7;
+    --color-background-dark: #000000;
+    --color-background-dark-secondary: #161617;
+    --color-background-dark-tertiary: #1d1d1f;
+    --color-surface: #ffffff;
+    --color-text-primary: #1d1d1f;
+    --color-text-secondary: #86868b;
+    --color-text-inverse: #ffffff;
+    --color-text-link: #0066cc;
+    --color-text-accent: #2997ff;
+    --color-neutral: #d2d2d7;
+    --color-border: #d2d2d7;
+    --color-focus-ring: #0071e3;
+
+    --radius-sm: 8px;
+    --radius-md: 11px;
+    --radius-full: 999px;
+
+    --elevation-card: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
+    --motion-duration-fast: 240ms;
+    --motion-duration-base: 320ms;
+    --motion-easing-standard: cubic-bezier(0.4, 0, 0.6, 1);
+
+    --font-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'IBM Plex Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-sans: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'IBM Plex Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: 'SFMono-Regular', 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+  }
+
+  html.dark {
+    /* Strictly Black & Yellow Dark Mode Theme */
+    --color-primary: #facc15;
+    --color-primary-hover: #eab308;
+    --color-background: #000000;
+    --color-surface: #0a0a0a;
+    --color-text-primary: #fef9c3;
+    --color-text-secondary: #d4c46a;
+    --color-border: rgba(250, 204, 21, 0.28);
+    --color-focus-ring: #facc15;
+  }
+
+  html,
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+
+  code,
+  pre,
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.apple-transition {
+  transition-duration: var(--motion-duration-fast);
+  transition-timing-function: var(--motion-easing-standard);
+}
+
+/* Subtle Apple-style scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7c7cc;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #86868b;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(250, 204, 21, 0.35);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(250, 204, 21, 0.65);
+}
+
+/* Leaflet map layering & Apple-clean popup integration */
+.leaflet-container {
+  font-family: var(--font-sans);
+  z-index: 1;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 500;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 11px;
+  padding: 2px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+}
+
+html.dark .leaflet-popup-content-wrapper,
+html.dark .leaflet-popup-tip {
+  background: #0a0a0a;
+  color: #fef9c3;
+  border: 1px solid rgba(250, 204, 21, 0.35);
+}
+
+.leaflet-tooltip {
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  padding: 4px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.uhi-map-street-light .leaflet-tile-pane {
+  filter: contrast(1.04) saturate(1.06);
+}
+
+.uhi-map-street-dark .leaflet-tile-pane {
+  filter: invert(93%) hue-rotate(180deg) brightness(0.92) contrast(1.08) saturate(0.9);
+}
+

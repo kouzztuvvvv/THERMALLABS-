@@ -1,0 +1,6 @@
+{
+  "name": "Urban Heat Island (UHI) Visualizer & Analytics",
+  "description": "Scientific GIS dashboard for analyzing urban microclimates, land-cover density, surface temperature anomalies, and albedo across metropolitan neighborhoods.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
