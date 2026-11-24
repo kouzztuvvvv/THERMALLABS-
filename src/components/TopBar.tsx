@@ -53,7 +53,7 @@ export function TopBar({
               : 'text-white focus-visible:ring-[#0071e3]'
           }`}
         >
-          UHI Atlas · India
+          THERMALLABS
         </a>
 
         {/* Zone 2: App Search Bar + Single-line Navigation */}
