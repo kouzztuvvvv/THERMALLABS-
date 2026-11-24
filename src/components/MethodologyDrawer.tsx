@@ -296,8 +296,8 @@ export function MethodologyDrawer({
                   talk: 'Highlight the OLS regression scatter plot showing how +10% canopy gain consistently lowers peak surface temperature across diverse Indian cities.',
                 },
                 {
-                  step: 'Part 5 · Nocturnal Heat Retention & AI Area Analyst (Diurnal + Atlas AI)',
-                  talk: 'Open the 24h Diurnal Profile tab and launch Ask Atlas AI to query why specific neighborhoods retain heat after sunset and receive tailored cooling recommendations.',
+                  step: 'Part 5 · Nocturnal Heat Retention & AI Area Analyst (Diurnal + THERMA)',
+                  talk: 'Open the 24h Diurnal Profile tab and launch Ask THERMA to query why specific neighborhoods retain heat after sunset and receive tailored cooling recommendations.',
                 },
                 {
                   step: 'Part 6 · Policy Prioritization & Methodology (Matrix & Drawer)',

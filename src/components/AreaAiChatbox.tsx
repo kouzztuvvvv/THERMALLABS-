@@ -475,7 +475,7 @@ export function AreaAiChatbox({
     >
       {isOpen && (
         <section
-          aria-label="Atlas AI Area & Voice Climate Analyst"
+          aria-label="THERMA Area & Voice Climate Analyst"
           className={`w-[min(380px,calc(100vw-2rem))] h-[min(460px,calc(100vh-5.5rem))] rounded-[11px] border flex flex-col overflow-hidden backdrop-blur-xl transition-colors ${
             isDark
               ? 'bg-[#0a0a0a]/96 border-[#facc15]/35 text-[#fef9c3] shadow-[0_16px_40px_rgba(0,0,0,0.85)]'
@@ -499,7 +499,7 @@ export function AreaAiChatbox({
                   aria-hidden="true"
                 />
                 <h2 className="text-xs font-semibold tracking-tight truncate">
-                  Atlas AI · Voice &amp; Area Analyst
+                  THERMA · Voice &amp; Area Analyst
                 </h2>
               </div>
               <p
@@ -590,7 +590,7 @@ export function AreaAiChatbox({
                     ? `Listening: "${interimTranscript}"`
                     : 'Listening... speak your question about any India area'
                   : speakingMessageId
-                    ? 'Speaking Atlas AI response...'
+                    ? 'Speaking THERMA response...'
                     : voiceNotice}
               </span>
               {speakingMessageId && (
@@ -793,7 +793,7 @@ export function AreaAiChatbox({
             <button
               type="submit"
               disabled={!input.trim() || isSending}
-              aria-label="Send question to Atlas AI"
+              aria-label="Send question to THERMA"
               className={`p-2 rounded-[8px] transition-colors cursor-pointer shrink-0 disabled:opacity-40 ${
                 isDark
                   ? 'bg-[#facc15] text-black hover:bg-[#eab308]'
@@ -811,7 +811,7 @@ export function AreaAiChatbox({
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
-        aria-label={isOpen ? 'Minimize Atlas AI chatbox' : 'Open Atlas AI chatbox'}
+        aria-label={isOpen ? 'Minimize THERMA chatbox' : 'Open THERMA chatbox'}
         className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 rounded-[11px] text-xs font-semibold border transition-all cursor-pointer shadow-[0_6px_20px_rgba(0,0,0,0.18)] ${
           isDark
             ? 'bg-[#facc15] border-[#facc15] text-black hover:bg-[#eab308]'
@@ -819,8 +819,8 @@ export function AreaAiChatbox({
         }`}
       >
         <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
-        <span className="sm:hidden">{isOpen ? 'Hide' : 'Atlas AI'}</span>
-        <span className="hidden sm:inline">{isOpen ? 'Hide Atlas AI' : 'Ask Atlas AI'}</span>
+        <span className="sm:hidden">{isOpen ? 'Hide' : 'THERMA'}</span>
+        <span className="hidden sm:inline">{isOpen ? 'Hide THERMA' : 'Ask THERMA'}</span>
       </button>
     </div>
   );
