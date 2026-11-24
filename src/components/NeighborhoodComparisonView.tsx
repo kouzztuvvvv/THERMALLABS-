@@ -178,10 +178,10 @@ export function NeighborhoodComparisonView({
   return (
     <div
       data-testid="neighborhood-comparison-view"
-      className="h-full flex flex-col gap-1.5 min-h-0"
+      className="h-full lg:h-auto flex flex-col gap-1.5 min-h-0"
     >
       {/* Selector Row: Pick Neighborhood A & Neighborhood B + Swap */}
-      <div className="shrink-0 grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-2 items-center">
+      <div className="shrink-0 grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] lg:grid-cols-1 gap-2 lg:gap-1.5 items-center">
         {/* Neighborhood A Selector */}
         <div className="flex items-center gap-1.5 min-w-0">
           <span
@@ -235,7 +235,7 @@ export function NeighborhoodComparisonView({
             }`}
           >
             <ArrowLeftRight className="w-3.5 h-3.5" aria-hidden="true" />
-            <span className="sm:hidden">Swap</span>
+            <span className="sm:hidden lg:inline">Swap</span>
           </button>
         </div>
 
@@ -280,10 +280,10 @@ export function NeighborhoodComparisonView({
       </div>
 
       {/* Side-by-Side Comparison Metrics Table + Simultaneous 24h Curve */}
-      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch">
-        {/* Metrics Matrix (7 cols) */}
+      <div className="flex-1 lg:flex-none min-h-0 grid grid-cols-1 gap-3 items-stretch">
+        {/* Metrics Matrix */}
         <div
-          className={`lg:col-span-7 min-h-0 overflow-auto border rounded-[8px] ${
+          className={`min-h-0 lg:max-h-[260px] overflow-auto border rounded-[8px] ${
             isDark ? 'border-[#facc15]/25' : 'border-[#d2d2d7]/80'
           }`}
         >
@@ -392,9 +392,9 @@ export function NeighborhoodComparisonView({
           </table>
         </div>
 
-        {/* Simultaneous 24h Diurnal Curve + Headline Insight (5 cols) */}
+        {/* Simultaneous 24h Diurnal Curve + Headline Insight */}
         <div
-          className={`lg:col-span-5 flex flex-col min-h-[140px] border rounded-[8px] px-2.5 py-1.5 ${
+          className={`flex flex-col min-h-[140px] lg:min-h-[200px] border rounded-[8px] px-2.5 py-1.5 ${
             isDark
               ? 'bg-[#0a0a0a] border-[#facc15]/20'
               : 'bg-[#fbfbfd] border-[#d2d2d7]/70'
@@ -416,7 +416,7 @@ export function NeighborhoodComparisonView({
               24h LST
             </span>
           </div>
-          <div className="flex-1 min-h-[105px] relative mt-0.5">
+          <div className="flex-1 min-h-[105px] lg:min-h-[160px] relative mt-0.5">
             <Line data={dualChartData} options={dualChartOptions} />
           </div>
         </div>

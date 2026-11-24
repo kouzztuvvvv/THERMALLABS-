@@ -140,7 +140,7 @@ export function NeighborhoodSidebar({
   return (
     <aside
       aria-label="India Microclimate Inspector"
-      className={`w-full lg:w-[372px] border-r flex flex-col shrink-0 h-full overflow-hidden z-20 transition-colors ${
+      className={`w-full border-r lg:border-r-0 lg:border-b flex flex-col shrink-0 h-full lg:h-auto overflow-hidden lg:overflow-visible z-20 transition-colors ${
         isDark
           ? 'bg-[#0a0a0a] border-[#facc15]/25 text-[#fef9c3]'
           : 'bg-white border-[#d2d2d7] text-[#1d1d1f]'
@@ -271,7 +271,7 @@ export function NeighborhoodSidebar({
 
       {/* Active Sector Satellite + Live Open-Meteo Telemetry */}
       <div
-        className={`p-3.5 border-b shrink-0 overflow-y-auto max-h-[430px] ${
+        className={`p-3.5 border-b shrink-0 overflow-y-auto max-h-[430px] lg:max-h-none lg:overflow-visible ${
           isDark
             ? 'border-[#facc15]/20 bg-[#141414]/80'
             : 'border-[#d2d2d7]/80 bg-[#f5f5f7]/75'
@@ -595,7 +595,7 @@ export function NeighborhoodSidebar({
       </div>
 
       {/* Scrollable India Sector Directory */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto lg:flex-none lg:max-h-[240px]">
         <div
           className={`px-4 py-2 border-b flex items-center justify-between text-[11px] font-medium sticky top-0 z-10 ${
             isDark

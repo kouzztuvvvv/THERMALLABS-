@@ -135,6 +135,16 @@ function CameraController({
   }, [map, isSidebarOpen]);
 
   useEffect(() => {
+    const container = map.getContainer();
+    if (typeof ResizeObserver === 'undefined' || !container) return;
+    const observer = new ResizeObserver(() => {
+      map.invalidateSize({ animate: false });
+    });
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [map]);
+
+  useEffect(() => {
     if (prevRegionRef.current !== regionFilter) {
       prevRegionRef.current = regionFilter;
       if (regionFilter === 'All India') {
@@ -337,8 +347,8 @@ export function IndiaLeafletMap({
         className={`shrink-0 border-b px-2.5 py-2 sm:px-3 flex flex-col gap-1.5 z-20 ${toolbarSurface}`}
       >
         {/* Row 1: Inspector Button (when closed) + Layer Switcher + Desktop Basemap Selector */}
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5 min-w-0 flex-1">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 min-w-0 flex-1 md:flex-initial">
             {!isSidebarOpen && (
               <button
                 type="button"

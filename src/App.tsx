@@ -159,6 +159,7 @@ export default function App() {
   const [isMethodologyOpen, setIsMethodologyOpen] = useState(false);
 
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const analyticsContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -258,6 +259,18 @@ export default function App() {
   const handleFocusMap = () => {
     mapContainerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
+  const handleSelectAnalyticsTab = useCallback((tab: AnalyticsTab) => {
+    setActiveAnalyticsTab(tab);
+    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+      requestAnimationFrame(() => {
+        analyticsContainerRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      });
+    }
+  }, []);
 
   const handleSelectSector = useCallback((sector: ResolvedIndiaSector) => {
     setSelectedSectorId(sector.id);
@@ -370,55 +383,17 @@ export default function App() {
         sectors={allSectors}
         activeLayer={activeLayer}
         onToggleTheme={() => setIsDark((prev) => !prev)}
-        onSelectTab={setActiveAnalyticsTab}
+        onSelectTab={handleSelectAnalyticsTab}
         onFocusMap={handleFocusMap}
         onOpenMethodology={() => setIsMethodologyOpen(true)}
         onSelectSector={handleSelectSector}
         onSelectGeocodePlace={handleSelectGeocodePlace}
       />
 
-      <div className="flex-1 flex min-h-0 relative lg:overflow-hidden">
-        {isSidebarOpen && (
-          <div className="fixed inset-x-0 top-12 bottom-0 z-40 lg:static lg:inset-auto lg:z-20 flex bg-black/35 backdrop-blur-[2px] lg:bg-transparent lg:backdrop-blur-none">
-            <NeighborhoodSidebar
-              isOpen={isSidebarOpen}
-              isDark={isDark}
-              onClose={() => setIsSidebarOpen(false)}
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
-              categoryFilter={categoryFilter}
-              onCategoryChange={setCategoryFilter}
-              tierFilter={tierFilter}
-              onTierChange={setTierFilter}
-              sortOption={sortOption}
-              onSortChange={setSortOption}
-              regionFilter={regionFilter}
-              onRegionChange={handleSelectRegion}
-              allSectors={allSectors}
-              filteredSectors={filteredSectors}
-              selectedSector={selectedSector}
-              hoveredSector={hoveredSector}
-              activeLayer={activeLayer}
-              envBySectorId={envBySectorId}
-              liveEnvironment={liveEnvironment}
-              isLoadingEnv={isLoadingEnv}
-              isSyncingAllEnv={isSyncingAllEnv}
-              envError={envError}
-              onSelectSector={handleSelectSector}
-              onHoverSector={handleHoverSector}
-              onSelectGeocodePlace={handleSelectGeocodePlace}
-            />
-            <div
-              className="flex-1 lg:hidden"
-              onClick={() => setIsSidebarOpen(false)}
-              aria-hidden="true"
-            />
-          </div>
-        )}
-
+      <div className="flex-1 flex flex-col lg:flex-row min-h-0 relative lg:overflow-hidden">
         <main
           ref={mapContainerRef}
-          className="flex-1 flex flex-col min-w-0 min-h-0 lg:overflow-hidden"
+          className="flex-1 flex flex-col min-w-0 min-h-0 lg:h-full lg:overflow-hidden"
         >
           <div className="relative flex-1 flex flex-col min-h-0">
             <IndiaLeafletMap
@@ -452,20 +427,69 @@ export default function App() {
               isDark={isDark}
             />
           </div>
-
-          <AnalyticsPanel
-            sectors={filteredSectors.length > 0 ? filteredSectors : allSectors}
-            allSectors={allSectors}
-            selectedSector={selectedSector}
-            indiaSummary={indiaSummary}
-            activeTab={activeAnalyticsTab}
-            sortOption={sortOption}
-            envBySectorId={envBySectorId}
-            isDark={isDark}
-            onSelectTab={setActiveAnalyticsTab}
-            onSelectSector={handleSelectSector}
-          />
         </main>
+
+        <aside
+          aria-label="Details and microclimate analytics"
+          className={`flex flex-col min-w-0 shrink-0 lg:w-[440px] xl:w-[480px] 2xl:w-[540px] lg:h-full lg:overflow-y-auto lg:border-l transition-colors ${
+            isDark
+              ? 'lg:bg-[#0a0a0a] lg:border-[#facc15]/25'
+              : 'lg:bg-white lg:border-[#d2d2d7]'
+          }`}
+        >
+          {isSidebarOpen && (
+            <div className="fixed inset-x-0 top-12 bottom-0 z-40 lg:static lg:inset-auto lg:z-auto flex bg-black/35 backdrop-blur-[2px] lg:bg-transparent lg:backdrop-blur-none lg:shrink-0">
+              <NeighborhoodSidebar
+                isOpen={isSidebarOpen}
+                isDark={isDark}
+                onClose={() => setIsSidebarOpen(false)}
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                categoryFilter={categoryFilter}
+                onCategoryChange={setCategoryFilter}
+                tierFilter={tierFilter}
+                onTierChange={setTierFilter}
+                sortOption={sortOption}
+                onSortChange={setSortOption}
+                regionFilter={regionFilter}
+                onRegionChange={handleSelectRegion}
+                allSectors={allSectors}
+                filteredSectors={filteredSectors}
+                selectedSector={selectedSector}
+                hoveredSector={hoveredSector}
+                activeLayer={activeLayer}
+                envBySectorId={envBySectorId}
+                liveEnvironment={liveEnvironment}
+                isLoadingEnv={isLoadingEnv}
+                isSyncingAllEnv={isSyncingAllEnv}
+                envError={envError}
+                onSelectSector={handleSelectSector}
+                onHoverSector={handleHoverSector}
+                onSelectGeocodePlace={handleSelectGeocodePlace}
+              />
+              <div
+                className="flex-1 lg:hidden"
+                onClick={() => setIsSidebarOpen(false)}
+                aria-hidden="true"
+              />
+            </div>
+          )}
+
+          <div ref={analyticsContainerRef} className="lg:shrink-0">
+            <AnalyticsPanel
+              sectors={filteredSectors.length > 0 ? filteredSectors : allSectors}
+              allSectors={allSectors}
+              selectedSector={selectedSector}
+              indiaSummary={indiaSummary}
+              activeTab={activeAnalyticsTab}
+              sortOption={sortOption}
+              envBySectorId={envBySectorId}
+              isDark={isDark}
+              onSelectTab={setActiveAnalyticsTab}
+              onSelectSector={handleSelectSector}
+            />
+          </div>
+        </aside>
       </div>
 
       <MethodologyDrawer

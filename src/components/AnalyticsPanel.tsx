@@ -437,10 +437,10 @@ export function AnalyticsPanel({
   return (
     <section
       aria-label="Comparative Microclimate Analytics"
-      className={`border-t shrink-0 flex flex-col transition-colors ${
+      className={`border-t lg:border-t-0 shrink-0 flex flex-col transition-colors ${
         activeTab === 'compare'
-          ? 'min-h-[296px] lg:h-[296px]'
-          : 'h-[256px]'
+          ? 'min-h-[296px] lg:min-h-0 lg:h-auto'
+          : 'h-[256px] lg:h-auto'
       } ${
         isDark
           ? 'bg-[#0a0a0a] border-[#facc15]/25 text-[#fef9c3]'
@@ -449,7 +449,7 @@ export function AnalyticsPanel({
     >
       {/* Analytics Sub-Header & Segmented Tabs */}
       <div
-        className={`px-3 sm:px-5 py-1.5 border-b flex items-center justify-between gap-3 shrink-0 ${
+        className={`px-3 sm:px-5 lg:px-4 py-1.5 lg:py-2.5 border-b flex items-center justify-between gap-3 lg:flex-col lg:items-stretch lg:gap-2 shrink-0 ${
           isDark ? 'border-[#facc15]/20' : 'border-[#d2d2d7]/70'
         }`}
       >
@@ -532,8 +532,8 @@ export function AnalyticsPanel({
 
         {/* Regional Statistical Summary Strip */}
         <div
-          className={`items-center gap-4 text-xs shrink-0 ${
-            activeTab === 'compare' ? 'hidden 2xl:flex' : 'hidden xl:flex'
+          className={`hidden lg:flex lg:flex-wrap lg:items-center lg:justify-between gap-x-3 gap-y-1 text-[11px] shrink-0 lg:pt-1.5 lg:border-t ${
+            isDark ? 'lg:border-[#facc15]/15' : 'lg:border-[#d2d2d7]/50'
           }`}
         >
           <div className="flex items-center gap-1.5">
@@ -570,19 +570,19 @@ export function AnalyticsPanel({
 
       {/* Panel Body */}
       <div
-        className={`flex-1 min-h-0 px-3 sm:px-5 py-2 ${
+        className={`flex-1 min-h-0 px-3 sm:px-5 lg:px-4 py-2 lg:py-3 ${
           activeTab === 'compare'
-            ? 'overflow-visible lg:overflow-hidden'
-            : 'overflow-hidden'
+            ? 'overflow-visible'
+            : 'overflow-hidden lg:overflow-visible'
         }`}
       >
         {activeTab === 'regression' && (
-          <div className="h-full w-full min-w-0 grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-            <div className="lg:col-span-8 h-full min-h-[160px] min-w-0 relative">
+          <div className="h-full lg:h-auto w-full min-w-0 grid grid-cols-1 gap-5 lg:gap-4 items-stretch">
+            <div className="h-full lg:h-[230px] min-h-[160px] min-w-0 relative">
               <Scatter data={scatterData} options={scatterOptions} />
             </div>
             <div
-              className={`hidden lg:flex lg:col-span-4 flex-col justify-between border-l pl-5 py-1 text-xs ${
+              className={`hidden lg:flex flex-col justify-between gap-3 border-t pt-3 text-xs ${
                 isDark ? 'border-[#facc15]/20' : 'border-[#d2d2d7]/70'
               }`}
             >
@@ -657,12 +657,12 @@ export function AnalyticsPanel({
         )}
 
         {activeTab === 'diurnal' && (
-          <div className="h-full w-full min-w-0 grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-            <div className="lg:col-span-8 h-full min-h-[160px] min-w-0 relative">
+          <div className="h-full lg:h-auto w-full min-w-0 grid grid-cols-1 gap-5 lg:gap-4 items-stretch">
+            <div className="h-full lg:h-[230px] min-h-[160px] min-w-0 relative">
               <Line data={diurnalData} options={diurnalOptions} />
             </div>
             <div
-              className={`hidden lg:flex lg:col-span-4 flex-col justify-between border-l pl-5 py-1 text-xs ${
+              className={`hidden lg:flex flex-col justify-between gap-3 border-t pt-3 text-xs ${
                 isDark ? 'border-[#facc15]/20' : 'border-[#d2d2d7]/70'
               }`}
             >
@@ -723,7 +723,7 @@ export function AnalyticsPanel({
 
         {activeTab === 'matrix' && (
           <div
-            className={`h-full overflow-auto border rounded-[8px] ${
+            className={`h-full lg:h-auto lg:max-h-[360px] overflow-auto border rounded-[8px] ${
               isDark ? 'border-[#facc15]/25' : 'border-[#d2d2d7]/80'
             }`}
           >
